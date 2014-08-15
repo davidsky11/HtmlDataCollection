@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.sql.Date;
 
 /**
  * DataCollectionAndStorage类 用于数据的收集和存储
@@ -57,7 +58,7 @@ public class DataCollectionAndStorage {
 				if (!strGet.equals("")) {
 					// System.out.println("Date:" + strGet);
 					// 将收集到的日期存在数据结构里
-					ds.date = strGet;
+					ds.date = Date.valueOf(strGet);
 					// 这里索引+1 是用于获取后期的球队数据
 					++index; // 因为在html页面里 源代码里 球队数据是在刚好在日期之后
 				}

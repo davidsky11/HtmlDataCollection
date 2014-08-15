@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -61,7 +63,7 @@ public class DataQueryImpl extends UnicastRemoteObject implements
 	public Vector<String> getAllTeams() throws RemoteException {
 		// 使用一个向量来 存取 从数据库中读到的值
 		Vector<String> vecAllTeams = new Vector<String>();
-		String allteamsSql = "select HomeTeam,AwayTeam from premiership group by HomeTeam;";
+		String allteamsSql = "select HomeTeam, AwayTeam from premiership group by HomeTeam;";
 		ResultSet rs = null;
 		MySql ms = new MySql();
 		// 调用 MySql类里 查看数据的方法
@@ -71,7 +73,7 @@ public class DataQueryImpl extends UnicastRemoteObject implements
 			while (rs.next()) {
 				if (!vecAllTeams.contains(rs.getString("HomeTeam")))
 					vecAllTeams.add(rs.getString("HomeTeam"));
-				else if (!vecAllTeams.contains(rs.getString("AwayTeam")))
+				if (!vecAllTeams.contains(rs.getString("AwayTeam")))
 					vecAllTeams.add(rs.getString("AwayTeam"));
 			}
 
@@ -117,7 +119,7 @@ public class DataQueryImpl extends UnicastRemoteObject implements
 	 * @param date
 	 * @return 某一天的所有比赛结果
 	 */
-	public List<String> queryByDate(String date) throws RemoteException {
+	public List<String> queryByDate(Date date) throws RemoteException {
 		// 使用一个 list泛型来装载 比赛结果
 		List<String> lsMatchesOnDate = new ArrayList<String>();
 		String sqlDate = "SELECT * FROM premiership WHERE Date ='" + date + "'";
@@ -143,4 +145,10 @@ public class DataQueryImpl extends UnicastRemoteObject implements
 		return lsMatchesOnDate;
 	}
 
+	public static void main(String[] args) throws ParseException, RemoteException {
+		DataQueryImpl im = new DataQueryImpl();
+		
+		List<String> ls = im.queryByDate(java.sql.Date.valueOf("2014-05-11"));
+		System.out.println(ls.size());
+	}
 }

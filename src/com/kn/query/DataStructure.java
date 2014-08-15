@@ -1,5 +1,7 @@
 package com.kn.query;
 
+import java.util.Date;
+
 /**
  * 
  * @author kevin
@@ -10,6 +12,6 @@ public class DataStructure {
 
 	public String homeTeam;
 	public String awayTeam;
-	public String date;
+	public Date date;
 	public String result;
 }

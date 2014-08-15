@@ -2,6 +2,7 @@ package com.kn.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -23,6 +24,6 @@ public interface DataQueryInterface extends Remote {
 	public Vector<String> querySpecifiedTeam(String league)
 			throws RemoteException;
 
-	public List<String> queryByDate(String date) throws RemoteException;
+	public List<String> queryByDate(Date date) throws RemoteException;
 
 }

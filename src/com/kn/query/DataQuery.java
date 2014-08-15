@@ -37,7 +37,7 @@ public class DataQuery {
 	public Vector<String> getAllTeams() {
 		// 使用一个向量来 存取 从数据库中读到的值
 		Vector<String> vecAllTeams = new Vector<String>();
-		String allteamsSql = "select HomeTeam,AwayTeam from premiership group by HomeTeam;";
+		String allteamsSql = "select HomeTeam, AwayTeam from premiership group by HomeTeam;";
 		ResultSet rs = null;
 		MySql ms = new MySql();
 		// 调用 MySql类里 查看数据的方法

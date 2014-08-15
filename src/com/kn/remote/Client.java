@@ -1,7 +1,11 @@
 package com.kn.remote;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.rmi.Naming;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
@@ -70,6 +74,7 @@ public class Client {
 
                         System.out
                                 .print("-----------------------------------------------\r\n");
+                        System.out.println("球队(" + vecAllTeams.size() + "支): \n");
                         for (int i = 0; i < vecAllTeams.size(); i++) {
                             if (i % 7 == 0 && i != 0) {
                                 System.out.println("\r\n");
@@ -83,8 +88,10 @@ public class Client {
 
                 } else if (intInput == 4) {
                     System.out.println("请输入你要查看的球队");
-                    Scanner scLeague = new Scanner(System.in);
-                    String strLeague = scLeague.next();
+                    BufferedReader scLeague = new BufferedReader(new InputStreamReader(System.in, "UTF8"));
+                    String strLeague = scLeague.readLine();
+                    //strLeague = new String(strLeague.getBytes("iso8859-1"), "utf-8");
+                    System.out.println(strLeague);
                     // 获取 具体球队的比赛结果
                     Vector<String> lsResult = dqInterface
                             .querySpecifiedTeam(strLeague);
@@ -100,12 +107,13 @@ public class Client {
                     System.out
                             .println("\r\n---------------------------------------------------");
                 } else if (intInput == 5) {
-                    System.out.println("请输入你要查看的比赛日期  例子格式[14.01.2012]");
+                    System.out.println("请输入你要查看的比赛日期  例子格式[2014-05-11]");
                     Scanner scDate = new Scanner(System.in);
                     String strDate = scDate.next();
+                    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     // 获取具体日期下的 所有比赛
                     List<String> lsResulOnDate = dqInterface
-                            .queryByDate(strDate);
+                            .queryByDate(java.sql.Date.valueOf(strDate));
                     if (lsResulOnDate.size() != 0) {
                         System.out.println("日期\t\t\t主队\t\t客队\t\t比分");
                         for (int i = 0; i < lsResulOnDate.size(); i++) {
@@ -121,7 +129,7 @@ public class Client {
             }
         } catch (Exception e) {
             System.out.println("远程链接出错,请检查!");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
