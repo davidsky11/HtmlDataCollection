@@ -9,7 +9,9 @@ import java.util.Vector;
 
 /**
  * Client 类 用于启动客户端  远程连接并访问 服务端
- * @author SoFlash - 博客园  http://www.cnblogs.com/longwu
+ * @author kevin
+ *
+ * Created At 2014-8-15 上午11:39:51
  */
 public class Client {
     /**
