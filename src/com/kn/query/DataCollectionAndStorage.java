@@ -68,14 +68,14 @@ public class DataCollectionAndStorage {
 				if (!strGet.equals("") && index == 1) { // 索引为1的是主队数据
 					// 通过subtring方法 分离出 主队数据
 					strGet = strGet.substring(1, strGet.indexOf("</a>"));
-					// System.out.println("HomeTeam:" + strGet); // 打印出主队
+					System.out.println("HomeTeam:" + strGet); // 打印出主队
 					// 将收集到的主队名称 存到 数据结构里
 					ds.homeTeam = strGet;
 					index++; // 索引+1之后 为2了
 					// 通过subtring方法 分离出 客队
 				} else if (!strGet.equals("") && index == 2) { // 这里索引为2的是客队数据
 					strGet = strGet.substring(1, strGet.indexOf("</a>"));
-					// System.out.println("AwayTeam:" + strGet); // 打印出客队
+					System.out.println("AwayTeam:" + strGet); // 打印出客队
 					// 将收集到的客队名称 存到数据结构里
 					ds.awayTeam = strGet;
 					index = 0; // 收集完客队名称后 需要将索引还原 用于收集下一条数据的主队名称
@@ -92,9 +92,9 @@ public class DataCollectionAndStorage {
 					// System.out.println();
 
 					// MySql插入语句
-					sqlLeagues = "INSERT INTO Premiership values(\"" + ds.date
-							+ "\"," + "\"" + ds.homeTeam + "\"," + "\""
-							+ ds.awayTeam + "\"," + "\"" + ds.result + "\")";
+					sqlLeagues = "INSERT INTO Premiership values(\"" + ds.homeTeam
+							+ "\"," + "\"" + ds.awayTeam + "\"," + "\""
+							+ ds.result + "\"," + "\"" + ds.date + "\")";
 					// 调用MySql类的datatoMySql()方法 来执行 MySql插入语句
 					ms.datatoMySql(sqlLeagues);
 					i++; // 每插入完一条记录 i+1;

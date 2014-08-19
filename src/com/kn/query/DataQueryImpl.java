@@ -71,7 +71,7 @@ public class DataQueryImpl extends UnicastRemoteObject implements
 			while (rs.next()) {
 				if (!vecAllTeams.contains(rs.getString("HomeTeam")))
 					vecAllTeams.add(rs.getString("HomeTeam"));
-				else if (!vecAllTeams.contains(rs.getString("AwayTeam")))
+				if (!vecAllTeams.contains(rs.getString("AwayTeam")))
 					vecAllTeams.add(rs.getString("AwayTeam"));
 			}
 
